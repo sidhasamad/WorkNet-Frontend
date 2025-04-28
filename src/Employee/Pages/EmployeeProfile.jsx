@@ -566,7 +566,7 @@ const EmployeeProfile = () => {
             {/* GitHub */}
             <div>
               <label htmlFor="github" className="block text-sm font-medium text-gray-700">
-                GitHub
+                GitHub link
               </label>
               <input
                 type="text"
