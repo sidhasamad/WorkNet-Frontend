@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { UserIcon, EnvelopeIcon, PhoneIcon, PaperClipIcon, BriefcaseIcon, CurrencyDollarIcon } from '@heroicons/react/24/outline'
@@ -7,12 +7,15 @@ import { UserIcon, EnvelopeIcon, PhoneIcon, PaperClipIcon, BriefcaseIcon, Curren
 const ApplyJobModal = ({ job, closeModal }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  
+  console.log("email",email);
+  
   const [phonenumber, setPhonenumber] = useState('');
   const [resume, setResume] = useState(null);
   const [fresherOrExperienced, setFresherOrExperienced] = useState('');
   const [currentCTC, setCurrentCTC] = useState('');
   const [expectedCTC, setExpectedCTC] = useState('');
-  const token = localStorage.getItem('accessToken');
+  const token = localStorage.getItem('accessToken') || localStorage.getItem('token');
   const apiUrl = import.meta.env.VITE_USER_URL;
 
   const handleApply = async () => {
@@ -33,7 +36,8 @@ const ApplyJobModal = ({ job, closeModal }) => {
       formData.append("currentCTC", currentCTC);
     }
     
-
+   
+    
     try {
       const response = await axios.post(`${apiUrl}/jobs/applyJob`, formData, {
         headers: {
@@ -83,7 +87,7 @@ const ApplyJobModal = ({ job, closeModal }) => {
             <input
               className="border p-2 rounded w-full"
               type="email"
-              placeholder="Email"
+              placeholder={email || "Email"}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -95,7 +99,7 @@ const ApplyJobModal = ({ job, closeModal }) => {
             <input
               className="border p-2 rounded w-full"
               type="text"
-              placeholder="Phone Number"
+              placeholder='phonenumber'
               value={phonenumber}
               onChange={(e) => setPhonenumber(e.target.value)}
             />

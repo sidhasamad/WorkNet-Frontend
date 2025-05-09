@@ -11,10 +11,10 @@ import JobPost from '../Employer/Pages/Jobs/JobPost';
 import JobPostDetails from '../Employer/Pages/Jobs/JobPostDetails';
 import { JobProvider } from '../Employer/Pages/EmployerContext/EmployerContext';
 import GetApplicants from '../Employer/Pages/Jobs/Applicants';
+import EmployerProfileModal from '../Employer/Pages/EmployerProfileModal';
+import EmployerProfile from '../Employer/Pages/EmployerProfile';
 // import EdiJobModal from '../Employer/Pages/Jobs/EdiJobModal';
 // import EmployerForgotPassword from '../Employer/Pages/ForgotPassword';
-
-
 const EmployerRouter = () => {
   return (
     <div>
@@ -27,11 +27,13 @@ const EmployerRouter = () => {
         <Route path='/forgotPassword' element={<ForgotPassword/>}/> 
         <Route path='/otpVerify' element={<OtpVerification/>}/> 
         <Route path='/resetPassword' element={<ResetPassword/>}/> 
+        <Route path='/profileModal' element={<EmployerProfileModal/>}/> 
 
         {/* <Route path='/employer-ForgotPassword' element={<EmployerForgotPassword/>}/> */}
         <Route path='/jobPost' element={<JobPost/>}/>
         <Route path='/jobPost/:id' element={<JobPostDetails/>}/>
         <Route path='/applicants/:jobId' element={<GetApplicants/>}/>
+        <Route path='/employerProfile'  element={<EmployerProfile/>}/>
         {/* <Route path='/EdiJobModal/:id' element={<EdiJobModal/>}/> */}
       </Routes>
         </JobProvider>

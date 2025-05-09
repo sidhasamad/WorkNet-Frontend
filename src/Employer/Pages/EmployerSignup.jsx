@@ -14,8 +14,10 @@ import {
   faUpload,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import {  GoogleSignUpButton } from "../../components/Buttons";
+// import {  GoogleSignUpButton } from "../../components/Buttons";
 import logoImage from "../../assets/logo/logo.png";
+import { GoogleLogin } from "@react-oauth/google";
+const api_Url = import.meta.env.VITE_GOOGLE_URL;
 
 const api_url = import.meta.env.VITE_EMPLOYER_URL;
 console.log(api_url);
@@ -80,6 +82,31 @@ const EmployerSignup = () => {
       }
     },
   });
+
+
+  //=====================================================googleLogin=====================================
+
+  const handleGoogleLogin=async(credentialResponse)=>{
+    if(!credentialResponse.credential){
+      console.error("Google credential is missing");
+      toast.error('Google login failed!');
+      return;
+    }
+    try{
+      const res=await axios.post(`${api_Url}/auth/google`,{
+        accessToken:credentialResponse.credential
+      },{
+        withCredentials:true
+      });
+
+      localStorage.setItem("accessToken",res.data.accessToken.accessToken)
+      localStorage.setItem("isUser","true")
+      toast.success("Logged in successfully!")
+      navigate('/employer-homePage')
+    }catch(err){
+      toast.error('Google login failed')
+    }
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-primary">
@@ -273,7 +300,19 @@ const EmployerSignup = () => {
         <div className="text-center mt-2">
           <h1 className="mb-3 text-secondary text-[10px]">OR</h1>
         </div>
-        <GoogleSignUpButton text="Sign up with Google" />
+         <div className="flex items-center justify-center gap-2 px-2 py-1 text-secondary  rounded-full transition">
+
+                <GoogleLogin
+                  className="google-login-button"
+                  clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}                  onSuccess={handleGoogleLogin}
+                  //  prompt="select_account"
+                    // ux_mode="popup"
+                  onError={() => {
+                    console.error("Google Login Failed");
+                    toast.error("Google login failed");
+                  }}
+                />
+              </div>
       </div>
     </div>
   );

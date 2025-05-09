@@ -12,7 +12,7 @@ const GetJob = () => {
   const [userJob, setUserJob] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
   const [salaryFilter, setSalaryFilter] = useState("");
-  const [industryFilter, setIndustryFilter] = useState("");
+  const [jobTitleFilter, setJobTitleFilter] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
 
@@ -25,15 +25,15 @@ const GetJob = () => {
   const fetchJobs = async () => {
     try {
       const filter = [];
-      let url = `${apiUrl}/jobs/getUser-job`;
+      let url = `${apiUrl}/jobs/getUser-job`
       if (locationFilter) filter.push(`location=${locationFilter}`);
       if (salaryFilter) filter.push(`salary=${salaryFilter}`);
-      if (industryFilter) filter.push(`industry=${industryFilter}`);
+      if (jobTitleFilter) filter.push(`jobTitle=${jobTitleFilter}`);
 
       if (filter.length > 0) {
         url += `?${filter.join("&")}`;
       }
-      const response = await axios.get(`${apiUrl}/jobs/getUser-job`);
+      const response = await axios.get(url);
       if (response.data && Array.isArray(response.data.data)) {
         setUserJob(response.data.data);
       } else {
@@ -46,7 +46,7 @@ const GetJob = () => {
 
   useEffect(() => {
     fetchJobs();
-  }, [locationFilter, salaryFilter, industryFilter]);
+  }, [locationFilter, salaryFilter, jobTitleFilter]);
 
   console.log("jobs", userJob);
   const handleApplyClick = (job) => {
@@ -93,11 +93,12 @@ const GetJob = () => {
 
           <select
             className=" p-2 focus:outline-none focus:border-blue-500"
-            value={industryFilter}
-            onChange={(e) => setIndustryFilter(e.target.value)}
+            value={jobTitleFilter}
+            onChange={(e) => setJobTitleFilter(e.target.value)}
           >
             <option value="">Industry</option>
             <option value="MernStack">MERN Stack</option>
+            <option value="React Developer">React Developer</option>
             <option value="Frontend">Frontend Developer</option>
             <option value="Backend">Backend Developer</option>
             <option value="DotNet">.NET Developer</option>

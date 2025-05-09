@@ -3,25 +3,18 @@ import { createContext, useContext, useState } from "react";
 import toast from "react-hot-toast";
 
 const EmployeeJobContext = createContext();
-
-
-
 export const JobSeekerProvider = ({ children }) => {
   const apiUrl = import.meta.env.VITE_USER_URL;
   const [savedJobs,setSavedJobs]=useState([])
   console.log("savedjobs",savedJobs);
-  
-
   const userSaved = async ({ jobId }) => {
-  const token=localStorage.getItem('accessToken')
+  const token=localStorage.getItem('accessToken') || localStorage.getItem('token')
   console.log("token",token);
 
   if(!token){
     console.error("token not found");
-    return;
-    
+    return;    
   }
-
     try {
       const res = await axios.post(
         `${apiUrl}/jobs/userSaved/${jobId}`,
@@ -46,7 +39,7 @@ export const JobSeekerProvider = ({ children }) => {
   };
   //===============================================getSaved============================
   const getSaved=async()=>{
-    const token=localStorage.getItem('accessToken')
+    const token=localStorage.getItem('accessToken') || localStorage.getItem('token')
     if(!token){
       console.error('Token not found');
       return;
@@ -64,17 +57,6 @@ export const JobSeekerProvider = ({ children }) => {
       
     }
   }
-
-  // const DeleteSavedPost=async(id)=>{
-  //    try{
-  //     await axios.delete(`${apiUrl}/jobs/savedDelete/${id}`)
-  //     toast('Saved deleted')
-  //    }catch(error){
-  //     toast.error('Failed to delete')
-  //    }
-
-  
- 
   return (
     <EmployeeJobContext.Provider value={{ userSaved,savedJobs,getSaved }}>
       {children}

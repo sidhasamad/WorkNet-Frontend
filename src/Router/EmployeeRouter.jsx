@@ -12,6 +12,9 @@ import EmployeeProfile from "../Employee/Pages/EmployeeProfile";
 import SavedJob from "../Employee/Pages/jobs/savedJob";
 import EmployeeAbout from "../Employee/Pages/EmployeeAbout";
 import EmployeeContact from "../Employee/Pages/EmployeeContact";
+import GetAppliedJob from "../Employee/Pages/jobs/getAppliedJob";
+import ApproveRejectEmployee from "../Employee/Pages/jobs/employeeNotification";
+import EmployeeNotifications from "../Employee/Pages/jobs/employeeNotification";
 // import ForgotPassword from '../components/Password/ForgotPassword';
 
 const UserRouter = () => {
@@ -31,8 +34,10 @@ const UserRouter = () => {
           />
           <Route path="/employeeprofile" element={<EmployeeProfile />} />
           <Route path="/employeeSavedJob" element={<SavedJob />} />
+          <Route path="/appliedJobs" element={<GetAppliedJob />} />
           <Route path="/employeeAbout" element={<EmployeeAbout />} />
           <Route path="/employeeContact" element={<EmployeeContact />} />
+          <Route path="/employeenotifications" element={<EmployeeNotifications />} />
           {/* <Route path='/forgotPassword' element={<ForgotPassword/>}/>  */}
 
           {/* <Route path="/aboutcontact" element={<Login />} />

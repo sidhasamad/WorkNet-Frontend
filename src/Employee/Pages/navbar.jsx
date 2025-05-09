@@ -1,10 +1,11 @@
-import { FaBookmark, FaUser } from "react-icons/fa";
+import { FaBell, FaBookmark, FaUser } from "react-icons/fa";
 import logo from "../../assets/logo/logo.png";
 import { useNavigate } from "react-router-dom";
 import EmployeeProfileModal from "./EmployeeProfileModal";
 
 export const Navbar = ()=>{
   const navigate=useNavigate()
+  
   return (
     <>
     <nav className="bg-primary w-full text-white shadow-lg fixed top-0 left-0 z-50">
@@ -48,20 +49,28 @@ export const Navbar = ()=>{
   </div>
 
   <div className="flex items-center space-x-2 mr-9 gap-2 ">
-  {localStorage.getItem("token") ? (
-    <FaBookmark className="text-xl cursor-pointer text-secondary" 
-    onClick={()=>navigate('/employeeSavedJob')}
+  {localStorage.getItem("token") || localStorage.getItem("accessToken")? (
+  <>
+    <FaBookmark
+      className="text-xl cursor-pointer text-secondary"
+      onClick={() => navigate('/employeeSavedJob')}
     />
-  ) : (
-    <button
-      className="text-secondary px-4 py-2 rounded-lg font-semibold hover:text-accent"
-      onClick={() => navigate("/main")}
-    >
-      Signup
-    </button>
-  )}
+    <FaBell
+      className="text-xl cursor-pointer text-secondary"
+      onClick={() => navigate("/employeenotifications")}
+    />
+  </>
+) : (
+  <button
+    className="text-secondary px-4 py-2 rounded-lg font-semibold hover:text-accent"
+    onClick={() => navigate("/main")}
+  >
+    Signup
+  </button>
+)}
 
-  <EmployeeProfileModal />
+<EmployeeProfileModal />
+
 </div>
 
 </div>

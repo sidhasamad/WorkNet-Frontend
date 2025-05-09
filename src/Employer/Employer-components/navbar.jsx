@@ -1,6 +1,7 @@
 import { FaBell, FaComment, FaCommentDots, FaComments, FaEnvelope, FaFacebookMessenger, FaPaperPlane, FaRegEnvelope, FaRegPaperPlane, FaUser } from "react-icons/fa";
 import logo from "../../assets/logo/logo.png";
 import { useNavigate } from "react-router-dom";
+import EmployerProfileModal from "../Pages/EmployerProfileModal";
 
 export const EmployerNavbar = ()=>{
   const navigate=useNavigate()
@@ -50,10 +51,7 @@ export const EmployerNavbar = ()=>{
   className="text-xl cursor-pointer text-gray-400 hover:text-secondary"
   onClick={() => navigate("/employermessages")}
 />
-    <FaUser
-      className="text-xl cursor-pointer text-gray-400 hover:text-secondary"
-      onClick={() => navigate("/employerprofile")}
-    />
+    <EmployerProfileModal/>
   </div>
 </div>
 </nav>

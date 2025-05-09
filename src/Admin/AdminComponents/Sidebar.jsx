@@ -27,7 +27,7 @@ const Sidebar = () => {
     >
       {/* Top - Logo and toggle */}
       <div className="flex items-center justify-between mb-8">
-        {!isCollapsed && <h2 className="text-[20px] font-bold ml-10 mt-9 ">WorkNet</h2>}
+        {!isCollapsed && <h2 className="text-[20px] font-bold ml-10 mt-9  ">WorkNet</h2>}
         <button onClick={() => setIsCollapsed(!isCollapsed)}>
           {isCollapsed ? <FaBars /> : <Minimize2 />}
         </button>
